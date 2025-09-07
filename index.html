@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi YouTube Live Viewer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="branding">Multi YouTube Viewer</div>
+        <div class="controls">
+            <input id="input-url" type="text" placeholder="Paste YouTube URL or Video ID" aria-label="YouTube URL or ID" />
+            <button id="btn-add" title="Add stream (Enter)">Add</button>
+            <button id="btn-play" title="Play all (P)">Play</button>
+            <button id="btn-pause" title="Pause all (P)">Pause</button>
+            <button id="btn-mute" title="Mute/Unmute all (M)">Mute</button>
+            
+            <button id="btn-clear" title="Remove all">Clear</button>
+            <button id="btn-help" title="Keyboard shortcuts">?</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="split">
+            <div class="col" id="grid-left" aria-live="polite"></div>
+            <div class="col" id="grid-right" aria-live="polite"></div>
+        </div>
+    </main>
+
+    <template id="tile-template">
+        <div class="tile" tabindex="0">
+            <div class="player" data-player></div>
+            <div class="tile-bar">
+                <span class="title" data-title>Loading…</span>
+                <div class="tile-actions">
+                    <button data-action="move-left" title="Move up / previous">↑</button>
+                    <button data-action="move-right" title="Move down / next">↓</button>
+                    <button data-action="to-left" title="Send to left">⟸</button>
+                    <button data-action="to-right" title="Send to right">⟹</button>
+                    <button data-action="mute">Mute</button>
+                    <button data-action="play">Play</button>
+                    <button data-action="pause">Pause</button>
+                    <button data-action="remove">Remove</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+
