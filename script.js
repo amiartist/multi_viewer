@@ -31,14 +31,6 @@ function extractVideoId(input) {
         if (url.hostname === "youtu.be") {
             return url.pathname.split("/").pop();
         }
-        if (url.hostname === "live.vkvideo.ru") {
-            // Extract stream ID from VK Video live URLs
-            // Format: https://live.vkvideo.ru/stream/STREAM_ID or https://live.vkvideo.ru/STREAM_ID
-            const pathMatch = url.pathname.match(/\/(?:stream\/)?([a-zA-Z0-9_-]+)/);
-            if (pathMatch) {
-                return `vk_${pathMatch[1]}`;
-            }
-        }
     } catch (_) {
         // not a URL
     }
@@ -142,36 +134,6 @@ function createTile(id, side) {
 }
 
 function createPlayer(hostElem, id, titleElem) {
-    // Check if it's a VK Video stream
-    if (id.startsWith('vk_')) {
-        const vkStreamId = id.replace('vk_', '');
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://live.vkvideo.ru/embed/${vkStreamId}`;
-        iframe.width = '100%';
-        iframe.height = '100%';
-        iframe.frameBorder = '0';
-        iframe.allowFullscreen = true;
-        iframe.style.border = 'none';
-        hostElem.appendChild(iframe);
-        
-        // For VK streams, we'll store a mock player object
-        const mockPlayer = {
-            playVideo: () => { /* VK player handles this internally */ },
-            pauseVideo: () => { /* VK player handles this internally */ },
-            mute: () => { /* VK player handles this internally */ },
-            unMute: () => { /* VK player handles this internally */ },
-            isMuted: () => false,
-            getPlayerState: () => 1, // Assume playing
-            setVolume: () => { /* VK player handles this internally */ },
-            destroy: () => { iframe.remove(); }
-        };
-        
-        titleElem.textContent = `VK Stream: ${vkStreamId}`;
-        state.players.set(id, mockPlayer);
-        return;
-    }
-    
-    // YouTube player
     const player = new YT.Player(hostElem, {
         videoId: id,
         playerVars: {
