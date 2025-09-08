@@ -296,7 +296,6 @@ function wireUi() {
         saveLayout();
     });
 
-    document.getElementById("btn-help").addEventListener('click', showHelp);
 
     // Allow dropping into empty columns
     [document.getElementById('grid-left'), document.getElementById('grid-right')].forEach(col => {
@@ -312,14 +311,6 @@ function wireUi() {
         });
         col.addEventListener('drop', () => { saveLayout(); });
     });
-}
-
-function showHelp() {
-    alert(
-`Shortcuts:\n
-Enter (in input): Add video\n
-P: Play/Pause all\nM: Mute/Unmute all`
-    );
 }
 
 function wireShortcuts() {
