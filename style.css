@@ -4,9 +4,9 @@
     --panel: #171a21;
     --text: #e6e6e6;
     --muted: #9aa3af;
-    --accent: #3b82f6;
+    --accent: #FFC300;
     --danger: #ef4444;
-    --focus: #22d3ee;
+    --focus: #FFC300;
 }
 
 * { box-sizing: border-box; }
@@ -59,6 +59,7 @@ body {
 }
 .controls button:hover {
     border-color: var(--accent);
+    cursor: pointer;
 }
 .layout-label { margin-left: 8px; }
 
@@ -101,6 +102,8 @@ main { padding: 10px; }
 .tile-actions button { background: #151a27; border: 1px solid #2a2f3e; color: var(--text); border-radius: 6px; padding: 6px 8px; }
 .tile-actions button[data-action="remove"] { border-color: var(--danger); }
 .tile:focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+.tile-actions button:hover { border-color: var(--accent); cursor: pointer; }
+.tile-actions button[data-action="remove"]:hover { border-color: var(--danger); background-color: var(--danger); }
 
 /* Drag-n-drop visuals */
 .tile[draggable="true"] { cursor: grab; }
